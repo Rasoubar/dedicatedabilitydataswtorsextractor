@@ -16,7 +16,7 @@ SWTOR Client Archives (.tor) + Jedipedia Definition Tables (gom.js, fnv1a64.js)
          ┌───────────────────────────┴───────────────────────────┐
          ▼                                                       ▼
   Raw Node Tree (/abl, /tal, /apc)                       Initial Pass-1 CSV
-  (data/extracted/)                                      (ability_icons.csv)
+  (data/extracted/)                                      (ability_data.csv)
          │                                                       │
          └───────────────────────────┬───────────────────────────┘
                                      ▼
@@ -71,7 +71,7 @@ COMBAT_ID_LOOKUP_KEY = "15685385242400905286" # Global Combat ID key inside locT
 * **Tactical Flags:** Inspects effect action blocks to flag `is_interrupt` (`effAction_AbilityInterrupt`), `grants_absorb` (`effAction_AbsorbDamage`), `its_revive` (`offer_revive`), and `ignore_alacrity`.
 
 ### 3. Two-Pass CSV Exporter
-1. **Pass 1 (Bootstrap):** Writes `ability_icons.csv` with resolved names and tooltips. This output is consumed by `matching.py` for semantic text comparisons.
+1. **Pass 1 (Bootstrap):** Writes `ability_data.csv` with resolved names and tooltips. This output is consumed by `matching.py` for semantic text comparisons.
 2. **Pass 2 (Enrichment):** Reads the generated `spec_exclusive_abilities.json` and `spec_abilities_strict_cascade_mirrors.json` to populate `mirror_fqn` and `exclusive_to_spec`.
 
 ---
@@ -171,8 +171,8 @@ Mirror matching runs through an elimination cascade. Candidate pools are filtere
 
 ## Output Data Specifications
 
-### 1. `ability_icons.csv`
-Primary tabular export generated in `data/extracted/ability_icons.csv`:
+### 1. `ability_data.csv`
+Primary tabular export generated in `data/extracted/ability_data.csv`:
 
 | Column Name | Type | Description |
 | :--- | :---: | :--- |
@@ -182,7 +182,7 @@ Primary tabular export generated in `data/extracted/ability_icons.csv`:
 | `tooltip` | `string` | In-game localized descriptive tooltip. |
 | `icon` | `string` | Icon asset stem (maps to `icons/<icon>.dds`). |
 | `attack_type` | `string` | Attack category (`Melee`, `Ranged`, `Tech`, `Force`, or combinations). |
-| `ablGlobalCooldownTime` | `float` | GCD duration (`-1.0` if off-GCD, `0.0` or `>0` for standard GCD). |
+| `ablGlobalCooldownTime` | `float` | GCD duration (empty if off-GCD, `-1` for standard GCD or `>0` for a fixed value). |
 | `mirror_fqn` | `string` | Cross-faction mirror node FQN. |
 | `exclusive_to_spec` | `string` | Formatted discipline identifier (`class.spec`) if truly exclusive. |
 | `is_interrupt` | `bool` | `True` if ability interrupts enemy spell casts. |
@@ -245,7 +245,7 @@ Verified 1:1 cross-faction mirror mapping table:
        "new_trait_column": lambda ext, rec: ext.check_new_trait(rec),
    }
    ```
-   *The column will automatically be included in `ability_icons.csv` headers and evaluated during extraction.*
+   *The column will automatically be included in `ability_data.csv` headers and evaluated during extraction.*
 
 ### Modifying or Adding Mirror Matching Filters
 1. Open `matching.py` and implement the filter function:
