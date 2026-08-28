@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Extractor.iml" filepath="$PROJECT_DIR$/.idea/Extractor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/dedicatedswtorsextractor.iml" filepath="$PROJECT_DIR$/.idea/dedicatedswtorsextractor.iml" />
     </modules>
   </component>
 </project>

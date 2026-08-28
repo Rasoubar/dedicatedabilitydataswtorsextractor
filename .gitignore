@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.spec
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDEs & System Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# SWTOR Client Archives & Raw Binary Assets
+*.tor
+*.stb
+abl_stb
+
+# Temporary Extraction Scratch Folders
+data/extract_work/
+extract_work/
+tmp/
+
+# Extracted Texture Assets
+icons/
+*.dds
+
+# Extracted Raw JSON Node Dumps
+data/abl/
+data/tal/
+data/apc/
+data/dis/
+data/eff/
+data/intermediate/
+data/extracted/
+
+# Generated Pipeline Output Files
+# (Uncomment the line below if you don't want to track generated CSV deliverables)
+# ability_icons*.csv
+spec_exclusive_abilities.json
+spec_abilities_strict_cascade_mirrors.json
+spec_abilities_matching_data.json
+ablAbilityReplacementInfo.json
+
+# Keep reference definition caches tracked
+!data/gom.js
+!data/fnv1a64.js
+!data/cache/
